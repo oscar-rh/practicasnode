@@ -1,0 +1,21 @@
+{
+  "name": "prueba",
+  "version": "1.0.0",
+  "description": "primer ejemplo de proyecto en node",
+  "main": "index.js",
+  "scripts": {
+    "iniciar": "echo 'hola desde script' ; echo 'otro hola'",
+    "start": "echo 'ejecuta inicio'"
+  },
+  "keywords": [
+    "kodemia",
+    "decimosegunda",
+    "clase",
+    "introuccion-node"
+  ],
+  "author": "@oscar-rh",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
+}
