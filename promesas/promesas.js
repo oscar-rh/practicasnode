@@ -1,6 +1,6 @@
 
 
-    var TIME = 3000
+    var TIEMPO = 2000
 
     function construir (muro) {
         return new Promise ( (resolve, reject ) =>
@@ -18,7 +18,7 @@
 
                     }
 
-                } , TIME  )
+                } , TIEMPO  )
 
         })
     }
@@ -39,7 +39,7 @@
 
                     }
 
-                } , TIME  )
+                } , TIEMPO  )
         })
     }
 
@@ -58,7 +58,7 @@
                         reject (error)
                     }
 
-                } , TIME  )
+                } , TIEMPO  )
         })
     }
 
@@ -98,6 +98,12 @@
         } 
     )
 
+    /* RESULTADO
+    ❯ node promesas.js
+    muro construido:  { contruido: true }
+    muro aplanado:  { contruido: true, aplanado: true }
+    muro pintado:  { contruido: true, aplanado: true, pintado: true }
+    */ /
 
 
         
