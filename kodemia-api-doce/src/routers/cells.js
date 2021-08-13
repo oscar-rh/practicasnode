@@ -1,17 +1,23 @@
 
 const express = require('express')
-const koders = require('../usecases/koders')
+const cells = require('../usecases/cells')
 const router = express.Router()
 
 router.get( '/', async (request, response) => {
 
+
+    const { id }  = request.query
+    const  filters  = {}   
+    
+    if (id) filters._id = id  
+
     try{
 
-        const allKoders = await koders.getAll()
+        const allCells = await cells.getAll(filters)
         response.json({
             success: true,
-            message: "Get All koders",
-            data : allKoders
+            message: "Get All Cells",
+            data : allCells
         })
 
     }
@@ -19,7 +25,7 @@ router.get( '/', async (request, response) => {
         response.status(400)
         response.json({
             success: false,
-            message: "Get All koders error "  ,
+            message: "Get All Cells error "  ,
             data : error.message
         })
 
@@ -33,12 +39,12 @@ router.delete('/:id',  async (request, response ) =>{
 
         const {id} = request.params  
 
-        const koderDeleted = await koders.deleteKoder(id)
-     
+        const cellDeleted = await cells.deleteCell(id)
+   
         response.json( {
             success: true,
-            message : "Koder borrado", 
-            data : koderDeleted 
+            message : "Celula borrado", 
+            data : cellDeleted 
         })
 
 
@@ -47,7 +53,7 @@ router.delete('/:id',  async (request, response ) =>{
         response.status(400)
         response.json({
             success: false,
-            message: "Error al borrar koder"  ,
+            message: "Error al borrar celula"  ,
             data : error.message
         })
 
@@ -60,13 +66,13 @@ router.delete('/:id',  async (request, response ) =>{
 
     try
     {
-        const newKoder  = request.body  
-        const koderCreated = await koders.createKoder( newKoder )
-
+        const newCell  = request.body  
+        const CellCreated = await cells.createCell( newCell )
+     
         response.json( {
            success : true,
-           message : "Koder creado", 
-           data : koderCreated 
+           message : "Celula creada", 
+           data : CellCreated 
         })   
     }
     catch (error)
@@ -74,7 +80,7 @@ router.delete('/:id',  async (request, response ) =>{
         response.status(400)
         response.json( {
             success : false ,
-            message : "Error al crear el koder ", 
+            message : "Error al crear la celula ", 
             data : error.message             
          })
     }
@@ -89,14 +95,13 @@ router.patch('/:id',  async (request, response ) =>{
 
         const {id} = request.params  
         const  data = request.body 
-
          
-        const koderUpdated = await koders.updateById(id, data)
-  
+        const cellUpdated = await cells.updateById(id, data)
+    
         response.json( {
             success: true,
-            message : "Koder actualizado", 
-            data : koderUpdated 
+            message : "Celula actualizada", 
+            data : cellUpdated 
         })
 
 

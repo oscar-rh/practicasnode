@@ -15,10 +15,16 @@ function createKoder(koder)
         return Koder.create(koder)
 }
 
+function updateById(id, newData)
+{
+        return Koder.findByIdAndUpdate(id,newData, { new: true})
+}
+
 module.exports = {
 
         getAll,    // getAll  : getAll 
         deleteKoder,
-        createKoder
+        createKoder,
+        updateById
 }
 
