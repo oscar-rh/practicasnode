@@ -29,7 +29,16 @@ const koderSchema = new mongoose.Schema({
       type: Number,
       min: 1,
       required: true
-   },               
+   },    
+   password : {
+      type : String , 
+      required: true
+   } ,
+   email: {
+      type : String, 
+      required : true,
+      match: /.+@.*\..*/
+   }         
 
 })
 

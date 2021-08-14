@@ -6,16 +6,22 @@ const kodersRouter = require('./routers/koders')
 const mentorsRouter = require('./routers/mentors')
 const cellsRouter = require('./routers/cells')
 
+//const logMiddle = require ('./middlewares/log')
+
 const server = express()
 
 
 //middleware
 server.use(express.json())  // -> parsea todo lo que venga en mipaquete a un formato JSON
 
+
 server.use( (request,response, next) => {
     console.log("RequestMethod: ", request.method , " RequestPath: ", request.path , " RequestBody: ", request.body   )
      next()
 })
+
+//server.use(logMiddle())
+
 
 // agregamos router
 server.use('/koders' , kodersRouter )
