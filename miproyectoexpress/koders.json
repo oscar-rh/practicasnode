@@ -1,46 +1,77 @@
 {
-    "koders": [
+  "koders": [
     {
-        "id": 1, 
-        "name": "Carlos Velasquez",
-        "generation": 12,
-        "gender":"m"
+      "id": 1,
+      "name": "Carlos Velasquez",
+      "generation": 12,
+      "gender": "m"
     },
     {
-        "id": 1, 
-        "name": "Carlos Velasquez",
-        "generation": 10,
-        "gender":"f"
-    },    
-    {
-        "id": 2, 
-        "name": "Juan",
-        "generation": 10,
-        "gender":"m"
+      "id": 2,
+      "name": "Juan",
+      "generation": 10,
+      "gender": "m"
     },
     {
-        "id": 3, 
-        "name": "Fernanda",
-        "generation": 7,
-        "gender":"f"
+      "id": 3,
+      "name": "Fernanda",
+      "generation": 7,
+      "gender": "f"
     },
     {
-        "id": 4, 
-        "name": "Alex",
-        "generation": 10,
-        "gender":"f"
+      "id": 4,
+      "name": "Alex",
+      "generation": 10,
+      "gender": "f"
     },
     {
-        "id": 5, 
-        "name": "Alex",
-        "generation": 9,
-        "gender":"m"
+      "id": 5,
+      "name": "Alex",
+      "generation": 10,
+      "gender": "m"
     },
     {
-        "id": 6, 
-        "name": "Cintia",
-        "generation": 10,
-        "gender":"f"
+      "id": 6,
+      "name": "Cintia",
+      "generation": 10,
+      "gender": "f"
     }
-]
+  ],
+  "mentors": [
+    {
+      "id": 1,
+      "name": "Mels",
+      "modulo": "Hello Koder"
+    },
+    {
+      "id": 2,
+      "name": "Oso",
+      "modulo": "Hello Koder"
+    },
+    {
+      "id": 3,
+      "name": "Israel",
+      "modulo": "JavaScript"
+    },
+    {
+      "id": 4,
+      "name": "Alfred",
+      "modulo": "Backend"
+    },
+    {
+      "id": 5,
+      "name": "Charles",
+      "modulo": "Backend"
+    },
+    {
+      "id": 6,
+      "name": "Israel",
+      "modulo": "Backend"
+    },
+    {
+      "id": 7,
+      "name": "Fernanda",
+      "modulo": "Backend"
+    }
+  ]
 }

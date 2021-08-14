@@ -21,20 +21,22 @@ server.get('/', (request, response ) =>{
     })
 })
 
-server.get('/koders', async (request, response ) =>{    
+server.get('/kodersORH', async (request, response ) =>{    
 
     const koders = await Koder.find({})
     let { gender, age, generation , name , lastname }  = request.query
 
     let kodersFiltered = koders
     
-    console.log( gender, age, name , lastname , generation)
+    //console.log( gender, age, name , lastname , generation)
 
     if (gender)
     {   
         kodersFiltered = kodersFiltered.filter( koder => {         
                     return koder.gender === gender 
                }  )
+
+        kodersFiltered = await Koder.find({ gender })      
     }
     if (age)
     {           
@@ -44,8 +46,7 @@ server.get('/koders', async (request, response ) =>{
     }
     if (generation)
     {           
-        kodersFiltered = kodersFiltered.filter( koder => {    
-                    console.log(koder.generation)                 
+        kodersFiltered = kodersFiltered.filter( koder => {                                        
                     return koder.generation === parseInt(generation) 
                 }  )
     }  
@@ -68,14 +69,61 @@ server.get('/koders', async (request, response ) =>{
 })
 
 
-server.post('/koders',  async (request, response ) =>{ 
-     let { gender, age, generation , name , lastname }  = request.body  
-    const koderCreated = await Koder.create( { name:name, lastname: lastname, gender:gender, age:age , generation:generation } )
-    console.log(koderCreated)      
+server.get('/koders', async (request, response ) =>{    
+
+    const { gender, age, is_min_age }  = request.query
+
+    const  filters  = {}   
+    
+    if (gender) filters.gender = gender  
+
+    if (age) 
+    {        
+        if ( is_min_age === "true" )         /// JSON.parse(is_min_age) 
+        {
+            filters.age =  { $gte: parseInt(age) }
+        }
+        else 
+        {
+            filters.age =  parseInt(age)
+        }
+
+    }
+
+    const koders = await Koder.find(filters)
+
     response.json( {
-        message : "Koder creado", 
-        data : koderCreated 
+        message : koders
     })
+})
+
+
+
+
+
+server.post('/koders',  async (request, response ) =>{ 
+
+    try
+    {
+        // let { gender, age, generation , name , lastname }  = request.body  
+        // const koderCreated = await Koder.create( { name:name, lastname: lastname, gender:gender, age:age , generation:generation } )     
+         const newKoder  = request.body  
+         const koderCreated = await Koder.create( newKoder )
+        console.log(koderCreated)      
+        response.json( {
+           message : "Koder creado", 
+           data : koderCreated 
+        })   
+    }
+    catch (error)
+    {
+        response.status(400)
+        response.json( {
+            success : false ,
+            message : error.message             
+         })
+    }
+
 
 })
 

@@ -5,31 +5,30 @@ const koderSchema = new mongoose.Schema({
         type: String,
         minLength: 2,
         maxLength: 50,
-        require: true
+        required: true
      },
      lastname: { 
         type: String,
         minLength: 2,
         maxLength: 50,
-        require: true,
+        required: true,
         trim: true
      },
      age: { 
         type: Number,
         min: 0,
         max: 90,
-        require: true
+        required: true
      },
      gender: { 
         type: String,
         enum: ['m','f'],
-        require: true
+        required: true
     } ,
     generation: { 
       type: Number,
       min: 1,
-      max: 90,
-      require: true
+      required: true
    },               
 
 })

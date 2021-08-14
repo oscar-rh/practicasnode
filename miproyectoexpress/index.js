@@ -1,6 +1,9 @@
 const express = require ('express')
 const fs = require("fs")
 
+const kodersRouter  = require ('./routers/koders')
+const mentorsRouter = require ('./routers/mentors')
+
 
 // tener acceso al servidor hay que instanciar express
 const server = express()
@@ -9,11 +12,21 @@ const server = express()
 server.use(express.json())  // -> parsea todo lo que venga en mipaquete a un formato JSON
 
 
-server.get('/hola', (request, response) => {
+server.use('/koders', kodersRouter )
+server.use('/mentors', mentorsRouter )
+
+
+server.get('/', (request, response) => {
     response.write("Hola mundo desde express")
     response.end()
 })
 
+server.listen(8080,()=>{
+    console.log("listening on port 8080")
+})
+
+
+/*
 server.post('/koders1', (request, response) => {
 
     // response.setHeader("Content-type", "application/json")
@@ -22,39 +35,40 @@ server.post('/koders1', (request, response) => {
     // response.status(200)
     response.status(201).json({ mensaje: "Hola Koders"})
 })
-
-server.get('/mentors', (request, response) => {
-
-
-    readFilePromise('mentors.json')
-    .then( (content) =>{
-        const contentObject = JSON.parse(content)
-        response.json({contentObject})
-    })
-    .catch((err) => {
-        response.status(400).json({error: "No se pudo leer el archivo"})
-    })
-
-    // response.setHeader("Content-type", "application/json")
-    // response.write(JSON.stringify({mensajeGet: "Aqui encontraras a los mentores de kodemia"}))
-    // response.end()
-})
-
-server.post('/mentors', (request, response) => {
-
-    // const body = request.body
-    // console.log("body", body)
-
-    // response.setHeader("Content-type", "application/json")
-    // response.write(JSON.stringify({mensajePost: "Aqui podras crear un mentor"}))
-    // response.end()
+*/
 
 
+// server.get('/mentors', (request, response) => {
 
 
-})
+//     readFilePromise('mentors.json')
+//     .then( (content) =>{
+//         const contentObject = JSON.parse(content)
+//         response.json({contentObject})
+//     })
+//     .catch((err) => {
+//         response.status(400).json({error: "No se pudo leer el archivo"})
+//     })
+
+//     // response.setHeader("Content-type", "application/json")
+//     // response.write(JSON.stringify({mensajeGet: "Aqui encontraras a los mentores de kodemia"}))
+//     // response.end()
+// })
+
+// server.post('/mentors', (request, response) => {
+
+//     // const body = request.body
+//     // console.log("body", body)
+
+//     // response.setHeader("Content-type", "application/json")
+//     // response.write(JSON.stringify({mensajePost: "Aqui podras crear un mentor"}))
+//     // response.end()
 
 
+// })
+
+
+/*
 server.get('/koders', (request, response) => {
 
     console.log(request.query)     //  koders?generation=10&name=antonio&limit=5                /// QUERY PARAMS
@@ -76,8 +90,9 @@ server.get('/koders', (request, response) => {
     // response.status(200)
     
 })
+*/
 
-
+/*
 server.post('/kodersorh', (request, response) => {
 
     const nuevosDatos = request.body  //ya viene en formato Json del postman
@@ -101,9 +116,8 @@ server.post('/kodersorh', (request, response) => {
 
 })
 
-server.listen(8080,()=>{
-    console.log("listening on port 8080")
-})
+*/
+
 
 /*
 PRACTICA:
@@ -113,6 +127,7 @@ GENERAR UNA RUTA QUE LEA DE UN ARCHIVO "JSON"
 Y CREAR UN GET QUE LEA EL ARCHIVO JSON
 */
 
+/*
 function readFilePromise( pathToRead )
 {
     return new Promise (  (resolve, reject) => 
@@ -125,7 +140,7 @@ function readFilePromise( pathToRead )
                 }
                 else 
                 {   
-                    /* const fileObject = {  pathToRead, content  }*/
+                    ///  const fileObject = {  pathToRead, content  }
                     const json = JSON.parse(content)
                     resolve(json)
                 }           
@@ -135,9 +150,11 @@ function readFilePromise( pathToRead )
     )
 }
 
+*/
 
 
 //// USANDO PROMESAS
+/*
 server.get('/koders', (req, res) => 
 {
     readFilePromise('koders.json')
@@ -150,8 +167,11 @@ server.get('/koders', (req, res) =>
     })
 })
 
+*/
 //// USANDO ASYN Y AWAIT, AWAIT HACE QUE LA FUNCION SE ESPERE HASTA QUE TERMINE PARA QUE NO CONTINUE, PERO REQUIERE QUE LA FUNCION SEA ASYNCRONA, 
 /// POR ESO SE LE COLOCA EL ASYNC AL CALLBACK
+
+/*
 server.get('/koders2', async (req, res) => 
 {
     //const content = await fs.promises.readFile('koders.json', 'utf8') //// ESTA ES UNA OPCION DIFERENTE DE USAR UN METODO DE FS QUE YA DEVUELVE UNA PROMESA
@@ -164,9 +184,10 @@ server.get('/koders2', async (req, res) =>
                                 } 
                             })
 })
-
+*/
 
 /// AGREGA UN KODER 
+/*
 server.post('/koders2', async (request, response) => {
     const newKoder = request.body
     const content = await readFilePromise('koders.json', 'utf8')
@@ -182,9 +203,10 @@ server.post('/koders2', async (request, response) => {
     })
 
 })
-
+*/
 /// PATH PARAMS     /koders/:id
 
+/*
 server.patch('/koders/:id', async (request,response) =>{
     // const id = (request.params.id)       // ----- una forma de tener los datos del objeto 
     const {id} = request.params 
@@ -212,7 +234,9 @@ server.patch('/koders/:id', async (request,response) =>{
     })
 
 } )
+*/
 
+/*
 server.get('/koders/:id' , async (request, response) => {
 
     const {id} = request.params      
@@ -250,8 +274,10 @@ server.get('/koders/:id' , async (request, response) => {
     }
 
 })
+*/
 
 
+/*
 server.delete('/koders/:id' , async (request, response)  => {
 
     const {id} = request.params      
@@ -276,36 +302,41 @@ server.delete('/koders/:id' , async (request, response)  => {
 
 })
 
+*/
+
+
 //  koders?generation=10&name=antonio&limit=5                /// QUERY PARAMS
+/*
 server.get('/koders4', async (request, response) => {
 
     // console.log(request.query)     
-    const {generation, gender, name } = request.query
+    const {generation, gender, name , counter } = request.query
     const content = await readFilePromise('koders.json', 'utf8')  
     //console.log(generation, gender, name)
-    let kodersByGeneration = null
 
-    if ( gender && name)
+    let kodersByGeneration = content.koders
+
+    if ( name)
     {        
-        kodersByGeneration = content.koders.filter( koder =>  koder.gender === gender && koder.name === name  )
-    }    
-    else 
-    {
-            if (generation)
-            {                
-                kodersByGeneration = content.koders.filter( koder =>  koder.generation === parseInt(generation) )
-            }
+        kodersByGeneration = kodersByGeneration.filter( koder =>  koder.name === name  )
+    } 
 
-            if (gender)
-            {             
-                kodersByGeneration = content.koders.filter( koder =>  koder.gender === gender )
-            }    
-
-            if (name)
-            {             
-                kodersByGeneration = content.koders.filter( koder =>  koder.name === name  )
-            }    
+    if (generation)
+    {                
+        kodersByGeneration = kodersByGeneration.filter( koder =>  koder.generation === parseInt(generation) )
     }
+
+    if (gender)
+    {             
+        kodersByGeneration = kodersByGeneration.filter( koder =>  koder.gender === gender )
+    }    
+
+    if (counter)
+    {           
+        kodersByGeneration  =  kodersByGeneration.slice(0, parseInt(counter) )            
+    }    
+
+
 
     content.koders = kodersByGeneration  || content.koders
    
@@ -321,29 +352,4 @@ server.get('/koders4', async (request, response) => {
     )
     
 })
-
-
-/*
-
-agregar un dato adicional a koders
-gender:"m"
-
-
-tarea dentro del get koders4: 
-
-1) hacer un filtro por genero 
-2) hacer un filtro por name
-3) si filtro gender =  "m"  y name= "Jose" que haga el filtro correspondiente  
-
-
-
-
-/ vimos: repaso de como realizar peticiones get post 
-/ paso de parametros path params, envia datos dinamicos al endpoint 
-/ query parameters para hacer filtros
-/ Hicimos un crud completo, 
-/ instalamos una dependencia de desarrollo  nodemon -D nodemon , un servicio en 2o plano que checa los cambios de codigo
-
-
-
 */
